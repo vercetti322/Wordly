@@ -1,0 +1,50 @@
+.word-grid {
+  display: grid;
+  margin: 10px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  border: 0.5px solid #333;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* only have borders on right and bottom */
+.word-grid > div {
+  margin: 0;
+  padding-top: 1.5px;
+  padding-bottom: 1.5px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 0.5px solid #333;
+  border-bottom: 0.5px solid #333;
+}
+
+/* remove right border from last column */
+.word-grid > div:nth-child(4n) {
+  border-right: none;
+}
+
+/* remove bottom border from last row */
+.word-grid > div:nth-last-child(-n + 4) {
+  border-bottom: none;
+}
+
+/* make second row highlighted */
+.word-grid > div:nth-child(n + 5):nth-child(-n + 8) {
+  background-color: var(--yellow);
+}
+
+.word-grid > div:nth-child(n + 13):nth-child(-n + 16) {
+  position: relative;
+  color: #707070;
+}
+
+.word-grid > div:nth-child(n + 13):nth-child(-n + 16)::after {
+  content: '';
+  height: 1.5px;
+  left: 0;
+  top: 50%;
+  position: absolute;
+  width: 100%;
+  background-color: #333;
+}
