@@ -1,6 +1,6 @@
-.word-grid {
-  display: grid;
+.word-grid { 
   margin: 10px;
+  display: grid;
   font-size: 1.15rem;
   font-weight: bold;
   border: 0.5px solid #333;
@@ -34,11 +34,13 @@
   background-color: var(--yellow);
 }
 
+/* lighten the striked letters in last row */
 .word-grid > div:nth-child(n + 13):nth-child(-n + 16) {
   position: relative;
   color: #707070;
 }
 
+/* creating a strikethrough in last row's letters  */
 .word-grid > div:nth-child(n + 13):nth-child(-n + 16)::after {
   content: '';
   height: 1.5px;

@@ -1,5 +1,6 @@
-p {
+.description {
   margin: 7.5px;
+  font-size: 1rem;
   width: 500px;
   text-align: center;
   line-height: 1.5;

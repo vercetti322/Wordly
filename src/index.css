@@ -1,9 +1,10 @@
 :root {
   /* CSS variables */
-  --pink: #f43378; /* Bright pink */
+  --pink: #f84986; /* Bright pink */
   --red: #fc1e05; /* Bold red */
   --blue: #1598ff; /* Bright blue */
   --yellow: #FFC72C; /* Bold Yellow */
+  --purple : #1d1160;
 
   /* Font settings */
   color: #333;
@@ -36,6 +37,6 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 15px;
+  padding: 5px;
   min-height: 100vh;
 }
