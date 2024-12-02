@@ -22,7 +22,6 @@
 
 /* hover effect on grid child */
 .word-grid > div:nth-child(n + 1):nth-child(-n + 13):hover {
-  background-color: var(--yellow);
   cursor: pointer;
 }
 
