@@ -1,4 +1,4 @@
-button {
+.special-button {
   padding: 10px 13.5px;
   border: none;
   margin: 3.5px;
@@ -12,18 +12,18 @@ button {
   transition: 0.75s ease-in;
 }
 
-button:hover {
+.special-button:hover {
   scale: 1.1;
   color: white;
   transition: 0.5s;
 }
 
-button:active {
+.special-button:active {
   opacity: 0.5;
   scale: 1.02;
 }
 
-button::after {
+.special-button::after {
   content: '';
   position: absolute;
   height: calc(100% + 5px);

@@ -3,7 +3,7 @@ import './Button.css';
 
 export default function Button({ text, handleClick }) {
   return (
-    <button onClick={handleClick}>
+    <button className='special-button' onClick={handleClick}>
       {text}
     </button>
   );

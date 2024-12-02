@@ -1,4 +1,4 @@
-.word-grid { 
+.word-grid {
   margin: 10px;
   display: grid;
   font-size: 1.15rem;
@@ -17,6 +17,13 @@
   padding-right: 10px;
   border-right: 0.5px solid #333;
   border-bottom: 0.5px solid #333;
+  user-select: none;
+}
+
+/* hover effect on grid child */
+.word-grid > div:nth-child(n + 1):nth-child(-n + 13):hover {
+  background-color: var(--yellow);
+  cursor: pointer;
 }
 
 /* remove right border from last column */
@@ -29,15 +36,11 @@
   border-bottom: none;
 }
 
-/* make second row highlighted */
-.word-grid > div:nth-child(n + 5):nth-child(-n + 8) {
-  background-color: var(--yellow);
-}
-
 /* lighten the striked letters in last row */
 .word-grid > div:nth-child(n + 13):nth-child(-n + 16) {
   position: relative;
   color: #707070;
+  cursor: not-allowed;
 }
 
 /* creating a strikethrough in last row's letters  */
