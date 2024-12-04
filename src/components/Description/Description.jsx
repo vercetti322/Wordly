@@ -1,11 +1,6 @@
+/* eslint-disable react/prop-types */
 import './Description.css';
 
-export default function Description() {
-  return (
-    <p className='description'>
-      Ready to challenge a random opponent in a fast-paced 15-minute showdown?
-      Jump into the queue, unleash your competitive spirit, and may the best
-      player win, no hassle, just pure fun!
-    </p>
-  );
+export default function Description({ children }) {
+  return <p className="description">{children}</p>;
 }

@@ -1,50 +1,51 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useGridSelection } from '../../hooks/useGridSelection';
+import './WordGrid.css';
+import { useEffect } from 'react';
 
-export default function WordGrid() {
-  const [focusedSquare, setFocusedSquare] = useState(0);
+export default function WordGrid({ gridData, onSelectionUpdate }) {
+  // Define the grid data
+  const columns = gridData[0].length;
+  const rows = gridData.length;
+
+  const { selectedCells, startSelection, updateSelection, endSelection } =
+    useGridSelection(gridData.length, gridData[0].length);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') {
-        setFocusedSquare((prev) => (prev < 2 ? prev + 1 : prev));
-      } else if (e.key === 'ArrowLeft') {
-        setFocusedSquare((prev) => (prev > 0 ? prev - 1 : prev));
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+    onSelectionUpdate(selectedCells);
+  }, [selectedCells, onSelectionUpdate]);
 
   return (
-    <div style={{ display: 'flex', gap: '10px' }}>
-      {/* First Square */}
-      <div
-        style={{
-          width: '100px',
-          height: '100px',
-          backgroundColor: focusedSquare === 0 ? 'yellow' : 'gray',
-        }}
-      ></div>
-
-      {/* Second Square */}
-      <div
-        style={{
-          width: '100px',
-          height: '100px',
-          backgroundColor: focusedSquare === 1 ? 'yellow' : 'gray',
-        }}
-      ></div>
-      <div
-        style={{
-          width: '100px',
-          height: '100px',
-          backgroundColor: focusedSquare === 2 ? 'yellow' : 'gray',
-        }}
-      ></div>
+    <div
+      className="word-grid"
+      style={{
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gridTemplateRows: `repeat(${rows}, 1fr)`,
+      }}
+    >
+      {gridData.map((row, rowIdx) =>
+        row.map((letter, colIdx) => {
+          const isSelected = selectedCells.some(
+            (cell) => cell.x === colIdx && cell.y === rowIdx
+          );
+          return (
+            <div
+              style={{
+                backgroundColor: isSelected ? 'var(--yellow)' : null,
+                borderRight: colIdx === columns - 1 ? 'none' : null,
+                borderBottom: rowIdx === rows - 1 ? 'none' : null,
+              }}
+              onMouseDown={() => startSelection(rowIdx, colIdx)}
+              onMouseMove={() => updateSelection(rowIdx, colIdx)}
+              onMouseUp={endSelection}
+              key={`${rowIdx}:${colIdx}`}
+              className="cell"
+            >
+              {letter}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }

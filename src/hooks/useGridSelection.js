@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 export function useGridSelection(gridRows, gridCols) {
     const [mouseDown, setMouseDown] = useState(false);
     const [startCell, setStartCell] = useState(null);
     const [endCell, setEndCell] = useState(null);
     const [selectedCells, setSelectedCells] = useState([]);
+    const selectedCellsRef = useRef([]);
 
     const startSelection = useCallback((row, col) => {
         const cell = { x: col, y: row };
@@ -20,26 +21,26 @@ export function useGridSelection(gridRows, gridCols) {
         const cell = { x: col, y: row };
         setEndCell(cell);
 
-        // calculate range
+        // Calculate range
         const newRange = [];
         const startX = startCell.x;
         const endX = cell.x;
         const startY = startCell.y;
         const endY = cell.y;
 
-        if (startY < endY && startX == endX) {
+        if (startY < endY && startX === endX) {
             for (let i = startY; i <= endY; i++) {
                 newRange.push({ x: startX, y: i });
             }
-        } else if (startY > endY && startX == endX) {
+        } else if (startY > endY && startX === endX) {
             for (let i = startY; i >= endY; i--) {
                 newRange.push({ x: startX, y: i });
             }
-        } else if (startX < endX && startY == endY) {
+        } else if (startX < endX && startY === endY) {
             for (let i = startX; i <= endX; i++) {
                 newRange.push({ x: i, y: startY });
             }
-        } else if (startX > endX && startY == endY) {
+        } else if (startX > endX && startY === endY) {
             for (let i = startX; i >= endX; i--) {
                 newRange.push({ x: i, y: startY });
             }
@@ -52,12 +53,16 @@ export function useGridSelection(gridRows, gridCols) {
         setMouseDown(false);
     }, []);
 
+    useEffect(() => {
+        selectedCellsRef.current = selectedCells;
+    }, [selectedCells]);
+
     return {
         selectedCells,
         mouseDown,
         startSelection,
         updateSelection,
         endSelection,
-        setSelectedCells
+        setSelectedCells,
     };
 }

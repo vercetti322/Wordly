@@ -1,0 +1,25 @@
+.word-grid {
+  margin: 10px;
+  display: grid;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.5px solid #333;
+}
+
+/* only have borders on right and bottom */
+.word-grid > div {
+  margin: 0;
+  padding-top: 1.5px;
+  padding-bottom: 1.5px;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 0.5px solid #333;
+  border-bottom: 0.5px solid #333;
+  user-select: none;
+  cursor: pointer;
+}
+
+
+
+

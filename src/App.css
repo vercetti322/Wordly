@@ -1,13 +1,24 @@
 .home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-buttons {
-    margin: 10px;
-    display: flex;
-    gap: 20px;
+  margin: 10px;
+  display: flex;
+  gap: 20px;
 }
 
+.app-hint {
+  font-size: 0.75rem;
+  margin: 5px;
+  font-style: italic;
+  color: black;
+}
 
+.starlink-meme {
+  z-index: 1000;
+  height: 100px;
+  width: auto;
+}
