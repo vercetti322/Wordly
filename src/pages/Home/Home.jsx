@@ -6,6 +6,7 @@ import CopyRight from '../../components/CopyRight/CopyRight';
 import WordGrid from '../../components/WordGrid/WordGrid';
 import { demoGridData } from '../../assets/constants';
 import { useState } from 'react';
+import { makeWord } from '../../assets/utils';
 
 export default function Home() {
   const [isWordFound, setIsWordFound] = useState(false);
@@ -13,11 +14,7 @@ export default function Home() {
 
   const handleSelectionUpdate = (cells) => {
     setSelectedCells(cells);
-
-    const word = selectedCells
-      .map((cell) => demoGridData[cell.y][cell.x])
-      .join('');
-
+    const word = makeWord(selectedCells, demoGridData);
     if (word === 'STARLINK') {
       setIsWordFound(true);
     } else {
@@ -33,10 +30,22 @@ export default function Home() {
         Jump into the queue, unleash your competitive spirit, and may the best
         player win, no hassle, just pure fun!
       </Description>
-      <WordGrid
-        onSelectionUpdate={handleSelectionUpdate}
-        gridData={demoGridData}
-      />
+      {!isWordFound && (
+        <WordGrid
+          onSelectionUpdate={handleSelectionUpdate}
+          gridData={demoGridData}
+        />
+      )}
+      {isWordFound && (
+        <>
+          <img
+            className="starlink-meme"
+            src="src\assets\images\starlink-meme.jpg"
+            alt="starlink-meme"
+          />
+          <p className="play-hint">Click on &quot;New Game&quot; fast!!!</p>
+        </>
+      )}
       <div className="home-buttons">
         <Button
           handleClick={() => console.log('New Button clicked')}
@@ -47,13 +56,6 @@ export default function Home() {
         <p className="home-hint">
           Select &apos;STARLINK&apos; using mouse from the above grid!
         </p>
-      )}
-      {isWordFound && (
-        <img
-          className="starlink-meme"
-          src="src\assets\images\starlink-meme.jpg"
-          alt="starlink-meme"
-        />
       )}
       <CopyRight />
     </div>

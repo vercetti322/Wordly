@@ -3,17 +3,29 @@ import { useGridSelection } from '../../hooks/useGridSelection';
 import './WordGrid.css';
 import { useEffect } from 'react';
 
-export default function WordGrid({ gridData, onSelectionUpdate }) {
-  // Define the grid data
+export default function WordGrid({
+  gridData,
+  onSelectionUpdate,
+  resetTrigger,
+}) {
   const columns = gridData[0].length;
   const rows = gridData.length;
 
-  const { selectedCells, startSelection, updateSelection, endSelection } =
-    useGridSelection(gridData.length, gridData[0].length);
+  const {
+    selectedCells,
+    startSelection,
+    updateSelection,
+    endSelection,
+    resetSelection,
+  } = useGridSelection(gridData.length, gridData[0].length);
 
   useEffect(() => {
     onSelectionUpdate(selectedCells);
   }, [selectedCells, onSelectionUpdate]);
+
+  useEffect(() => {
+    resetSelection();
+  }, [resetSelection, resetTrigger]);
 
   return (
     <div

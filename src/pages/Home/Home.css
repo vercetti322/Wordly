@@ -10,15 +10,17 @@
   gap: 20px;
 }
 
-.home-hint {
+.home-hint, .play-hint {
   font-size: 0.75rem;
-  margin: 5px;
+  margin: 2.5px;
   font-style: italic;
-  color: black;
+  color: #111;
 }
 
 .starlink-meme {
   z-index: 1000;
-  height: 100px;
+  height: 135px;
   width: auto;
+  border-radius: 5px;
+  margin: 5px 2px;
 }

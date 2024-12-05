@@ -11,7 +11,11 @@ export default function Error() {
 
   return (
     <div className="error">
-      <h1>Error 404</h1>
+      <img
+        className="ashneer-meme"
+        src="src\assets\images\ashneer-meme.jpg"
+        alt="ashneer-meme"
+      />
       <Button text={'Go Back'} handleClick={handleClick} />
     </div>
   );

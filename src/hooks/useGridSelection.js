@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback } from "react";
 
 export function useGridSelection(gridRows, gridCols) {
     const [mouseDown, setMouseDown] = useState(false);
     const [startCell, setStartCell] = useState(null);
     const [endCell, setEndCell] = useState(null);
     const [selectedCells, setSelectedCells] = useState([]);
-    const selectedCellsRef = useRef([]);
 
     const startSelection = useCallback((row, col) => {
         const cell = { x: col, y: row };
@@ -53,9 +52,9 @@ export function useGridSelection(gridRows, gridCols) {
         setMouseDown(false);
     }, []);
 
-    useEffect(() => {
-        selectedCellsRef.current = selectedCells;
-    }, [selectedCells]);
+    const resetSelection = useCallback(() => {
+        setSelectedCells([]);
+    }, []);
 
     return {
         selectedCells,
@@ -64,5 +63,6 @@ export function useGridSelection(gridRows, gridCols) {
         updateSelection,
         endSelection,
         setSelectedCells,
+        resetSelection
     };
 }

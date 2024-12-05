@@ -9,7 +9,7 @@
   cursor: pointer;
   transition: 0.5s ease;
   position: relative;
-  transition: 0.75s ease-in;
+  transition: 0.5s ease-in;
 }
 
 .special-button:hover {
