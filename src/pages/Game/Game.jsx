@@ -2,14 +2,17 @@
 import { Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import WordGrid from '../../components/WordGrid/WordGrid';
-import { demoGridData } from '../../assets/constants';
+import { demoGridJson } from '../../assets/constants';
 import Button from '../../components/Button/Button';
 import { useState } from 'react';
 import './Game.css';
-import { makeWord } from '../../assets/utils';
+import { getGridData, getGridStatus, makeWord } from '../../assets/utils';
 
 export default function Game() {
   const { id } = useParams();
+
+  const demoGridData = getGridData(demoGridJson.grid);
+  const demoGridStatus = getGridStatus(demoGridJson.grid);
 
   const [selectedCells, setSelectedCells] = useState([]);
 
@@ -43,9 +46,10 @@ export default function Game() {
     <div className="game">
       <Header text={`#${id}`} />
       <WordGrid
-        gridData={demoGridData}
+        letterData={demoGridData}
         onSelectionUpdate={handleSelectionUpdate}
         resetTrigger={resetTrigger}
+        statusData={demoGridStatus}
       />
       <input readOnly className="word-output" type="text" value={word} />
       <div className="button-group">

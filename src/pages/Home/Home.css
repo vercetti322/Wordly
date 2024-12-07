@@ -4,22 +4,23 @@
   align-items: center;
 }
 
-.home-buttons {
-  margin: 10px;
-  display: flex;
-  gap: 20px;
-}
-
-.home-hint, .play-hint {
+.home-hint {
   font-size: 0.75rem;
-  margin: 2.5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-style: italic;
   color: #111;
 }
 
+.queue-hint {
+  margin: 7.5px;
+  font-size: 1rem;
+  color: red;
+  font-weight: 900;
+}
+
 .starlink-meme {
-  z-index: 1000;
-  height: 135px;
+  height: 130px;
   width: auto;
   border-radius: 5px;
   margin: 5px 2px;

@@ -4,13 +4,25 @@ import Button from '../../components/Button/Button';
 import Description from '../../components/Description/Description';
 import CopyRight from '../../components/CopyRight/CopyRight';
 import WordGrid from '../../components/WordGrid/WordGrid';
-import { demoGridData } from '../../assets/constants';
-import { useState } from 'react';
-import { makeWord } from '../../assets/utils';
+import RegisterModal from '../../components/RegisterModal/RegisterModal';
+import { demoGridJson } from '../../assets/constants';
+import { useEffect, useState } from 'react';
+import hasTimePassed, {
+  getGridData,
+  getGridStatus,
+  hasDatePassed,
+  makeWord,
+} from '../../assets/utils';
 
 export default function Home() {
   const [isWordFound, setIsWordFound] = useState(false);
   const [selectedCells, setSelectedCells] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [playerPresent, setPlayerPresent] = useState(false);
+  const [playerName, setPlayerName] = useState('');
+
+  const demoGridData = getGridData(demoGridJson.grid);
+  const demoGridStatus = getGridStatus(demoGridJson.grid);
 
   const handleSelectionUpdate = (cells) => {
     setSelectedCells(cells);
@@ -21,6 +33,42 @@ export default function Home() {
       setIsWordFound(false);
     }
   };
+
+  const openRegisterModal = () => {
+    setModalOpen(true);
+  };
+
+  useEffect(() => {
+    const playerData = localStorage.getItem('player');
+
+    if (playerData !== null) {
+      try {
+        const parsedPlayerData = JSON.parse(playerData);
+
+        if (
+          parsedPlayerData &&
+          parsedPlayerData.creationDate &&
+          parsedPlayerData.creationTime
+        ) {
+          setPlayerPresent(true);
+          setPlayerName(parsedPlayerData.name);
+
+          let creationDate = parsedPlayerData.creationDate;
+          let creationTime = parsedPlayerData.creationTime;
+
+          if (hasDatePassed(creationDate) || hasTimePassed(creationTime)) {
+            localStorage.removeItem('player');
+            setPlayerPresent(false);
+          }
+        }
+      } catch (error) {
+        console.error('Error parsing player data from localStorage:', error);
+        setPlayerPresent(false);
+      }
+    } else {
+      setPlayerPresent(false);
+    }
+  }, []);
 
   return (
     <div className="home">
@@ -33,7 +81,8 @@ export default function Home() {
       {!isWordFound && (
         <WordGrid
           onSelectionUpdate={handleSelectionUpdate}
-          gridData={demoGridData}
+          letterData={demoGridData}
+          statusData={demoGridStatus}
         />
       )}
       {isWordFound && (
@@ -43,15 +92,13 @@ export default function Home() {
             src="src\assets\images\starlink-meme.jpg"
             alt="starlink-meme"
           />
-          <p className="play-hint">Click on &quot;New Game&quot; fast!!!</p>
         </>
       )}
-      <div className="home-buttons">
-        <Button
-          handleClick={() => console.log('New Button clicked')}
-          text={'New Game'}
-        />
-      </div>
+      {!playerPresent && (
+        <Button handleClick={openRegisterModal} text={'New Game'} />
+      )}
+      {playerPresent && <p className="queue-hint">{playerName}, you are in queue!</p>}
+      {modalOpen && <RegisterModal setModalOpen={setModalOpen} />}
       {!isWordFound && (
         <p className="home-hint">
           Select &apos;STARLINK&apos; using mouse from the above grid!
