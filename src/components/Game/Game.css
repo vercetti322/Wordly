@@ -1,0 +1,23 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.game .button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.game .word-output {
+  padding: 5px;
+  text-align: center;
+  border: 0.5px solid #333;
+}
+
+.game .word-output:focus,
+.game .word-output:active {
+  outline: none;
+  border: 0.75px solid #333; 
+}

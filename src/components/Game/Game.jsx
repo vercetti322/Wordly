@@ -1,31 +1,19 @@
 /* eslint-disable no-unused-vars */
-import { Navigate, useParams } from 'react-router-dom';
-import Header from '../../components/Header/Header';
-import WordGrid from '../../components/WordGrid/WordGrid';
-import { demoGridJson } from '../../assets/constants';
-import Button from '../../components/Button/Button';
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
 import './Game.css';
-import { getGridData, getGridStatus, makeWord } from '../../assets/utils';
+import Header from '../Header/Header';
+import WordGrid from '../WordGrid/WordGrid';
+import { demoGridJson } from '../../assets/constants';
+import Button from '../Button/Button';
+import { makeWord, getGridData, getGridStatus } from '../../assets/utils';
+import { useState } from 'react';
 
-export default function Game() {
-  const { id } = useParams();
-
+export default function Game({ id }) {
   const demoGridData = getGridData(demoGridJson.grid);
   const demoGridStatus = getGridStatus(demoGridJson.grid);
-
-  const [selectedCells, setSelectedCells] = useState([]);
-
   const [resetTrigger, setResetTrigger] = useState(0);
-
+  const [selectedCells, setSelectedCells] = useState([]);
   const [word, setWord] = useState('');
-
-  // validate the id
-  const isValid = /^[1-9]\d{3}$/;
-
-  if (!isValid.test(id)) {
-    return <Navigate to="/error" />;
-  }
 
   const handleSelectionUpdate = (cells) => {
     setSelectedCells(cells);
@@ -33,6 +21,17 @@ export default function Game() {
   };
 
   const handleSubmit = () => {
+    if (word.trim() === '') {
+      alert('Please select a word!');
+      return;
+    }
+
+    setSelectedCells([]);
+    setResetTrigger((prev) => prev + 1);
+    // submit the word to backend here...
+  };
+
+  const handleClear = () => {
     if (word.trim() === '') {
       alert('Please select a word!');
       return;
@@ -54,7 +53,7 @@ export default function Game() {
       <input readOnly className="word-output" type="text" value={word} />
       <div className="button-group">
         <Button handleClick={handleSubmit} text={'Submit Word'} />
-        <Button handleClick={handleSubmit} text={'Clear Selection'} />
+        <Button handleClick={handleClear} text={'Clear Selection'} />
       </div>
     </div>
   );

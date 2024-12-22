@@ -1,14 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Game from './pages/Game/Game';
-import Error from './pages/Error/Error';
+/* eslint-disable no-unused-vars */
+import Game from './components/Game/Game';
+import Home from './components/Home/Home';
+import { useState } from 'react';
 
 export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/error" element={<Error />} />
-      <Route path="/:id" element={<Game />} />
-    </Routes>
-  );
+  const [gameSession, isGameSession] = useState(false);
+
+  return <>{gameSession ? <Game id={1001} /> : <Home />}</>;
 }
