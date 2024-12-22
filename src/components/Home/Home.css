@@ -4,24 +4,30 @@
   align-items: center;
 }
 
-.home-hint {
-  font-size: 0.75rem;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-style: italic;
-  color: #111;
-}
-
-.queue-hint {
+.home .nick {
+  font-size: 1.1rem;
+  font-weight: 700;
   margin: 7.5px;
-  font-size: 1rem;
-  color: red;
-  font-weight: 900;
 }
 
-.starlink-meme {
-  height: 130px;
-  width: auto;
-  border-radius: 5px;
-  margin: 5px 2px;
+.home .copyright {
+  font-size: 0.8rem;
+  color: #5a5a5a;
+}
+
+.home .input {
+  padding: 5px;
+  margin: 7.5px;
+  outline: none;
+  border: 1px solid #333;
+  border-radius: 2px;
+  width: 40%;
+}
+
+.home .description {
+  margin: 7.5px;
+  font-size: 0.92rem;
+  width: 550px;
+  text-align: center;
+  line-height: 1.5;
 }

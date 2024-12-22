@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import './Game.css';
 import Header from '../Header/Header';
@@ -26,9 +25,10 @@ export default function Game({ id }) {
       return;
     }
 
+    // submit the word to backend here...
+    console.log(selectedCells);
     setSelectedCells([]);
     setResetTrigger((prev) => prev + 1);
-    // submit the word to backend here...
   };
 
   const handleClear = () => {
