@@ -5,9 +5,11 @@ import WordGrid from '../WordGrid/WordGrid';
 import { demoGridJson } from '../../assets/constants';
 import Button from '../Button/Button';
 import { makeWord, getGridData, getGridStatus } from '../../assets/utils';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import WsContext from '../../context/WsContext';
 
-export default function Game({ id }) {
+export default function Game({ game }) {
+  const { playerId } = useContext(WsContext);
   const demoGridData = getGridData(demoGridJson.grid);
   const demoGridStatus = getGridStatus(demoGridJson.grid);
   const [resetTrigger, setResetTrigger] = useState(0);
@@ -43,7 +45,13 @@ export default function Game({ id }) {
 
   return (
     <div className="game">
-      <Header text={`#${id}`} />
+      <Header text={`#${game.gameId}`} />
+      <p className='contestants'>
+        You vs{' '}
+        {game.firstPlayer.playerId === playerId
+          ? game.secondPlayer.name
+          : game.firstPlayer.name}
+      </p>
       <WordGrid
         letterData={demoGridData}
         onSelectionUpdate={handleSelectionUpdate}

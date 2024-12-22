@@ -10,6 +10,11 @@
   gap: 10px;
 }
 
+.game .contestants {
+  margin: 5px;
+  font-weight: 600;
+}
+
 .game .word-output {
   padding: 5px;
   text-align: center;

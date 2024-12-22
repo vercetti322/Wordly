@@ -2,9 +2,24 @@
 import Game from './components/Game/Game';
 import Home from './components/Home/Home';
 import { useState } from 'react';
+import useWebSockets from './hooks/useWebSockets';
+import WsContext from './context/WsContext';
 
 export default function App() {
-  const [gameSession, isGameSession] = useState(true);
-
-  return <>{gameSession ? <Game id={1001} /> : <Home />}</>;
+  const { registered, game, register, stompClient, playerCount, playerId } =
+    useWebSockets();
+  return (
+    <WsContext.Provider
+      value={{
+        registered,
+        register,
+        stompClient,
+        playerCount,
+        game,
+        playerId,
+      }}
+    >
+      {game ? <Game game={game} /> : <Home />}
+    </WsContext.Provider>
+  );
 }
