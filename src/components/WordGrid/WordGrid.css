@@ -1,7 +1,6 @@
 .word-grid {
-  margin: 10px;
+  margin: 2.5px;
   display: grid;
-  font-size: 1rem;
   color: #333;
   font-weight: bold;
   border: 0.1px solid #777;
@@ -10,12 +9,12 @@
 /* only have borders on right and bottom */
 .word-grid > div {
   margin: 0;
-  font-size: 0.9rem;
-  padding-top: 1.5px;
-  padding-bottom: 1.5px;
+  font-size: 0.75rem;
+  padding-top: 1px;
+  padding-bottom: 1px;
   text-align: center;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
   border-right: 0.1px solid #777;
   border-bottom: 0.1px solid #777;
   user-select: none;

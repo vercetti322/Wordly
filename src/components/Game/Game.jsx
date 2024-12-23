@@ -2,7 +2,6 @@
 import './Game.css';
 import Header from '../Header/Header';
 import WordGrid from '../WordGrid/WordGrid';
-import { demoGridJson } from '../../assets/constants';
 import Button from '../Button/Button';
 import { makeWord, getGridData, getGridStatus } from '../../assets/utils';
 import { useContext, useState } from 'react';
@@ -10,8 +9,8 @@ import WsContext from '../../context/WsContext';
 
 export default function Game({ game }) {
   const { playerId } = useContext(WsContext);
-  const demoGridData = getGridData(demoGridJson.grid);
-  const demoGridStatus = getGridStatus(demoGridJson.grid);
+  const demoGridData = getGridData(game.grid);
+  const demoGridStatus = getGridStatus(game.grid);
   const [resetTrigger, setResetTrigger] = useState(0);
   const [selectedCells, setSelectedCells] = useState([]);
   const [word, setWord] = useState('');
@@ -46,11 +45,11 @@ export default function Game({ game }) {
   return (
     <div className="game">
       <Header text={`#${game.gameId}`} />
-      <p className='contestants'>
-        You vs{' '}
-        {game.firstPlayer.playerId === playerId
-          ? game.secondPlayer.name
-          : game.firstPlayer.name}
+      <p className="contestants">
+        You{`(${game.playerScores[playerId]})`} vs
+        {` ${game.otherPlayer.name}(${
+          game.playerScores[game.otherPlayer.playerId]
+        })`}
       </p>
       <WordGrid
         letterData={demoGridData}
