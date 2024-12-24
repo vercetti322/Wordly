@@ -47,9 +47,7 @@ export default function WordGrid({
                 backgroundColor: isSelected ? 'var(--yellow)' : null,
                 borderRight: colIdx === columns - 1 ? 'none' : null,
                 borderBottom: rowIdx === rows - 1 ? 'none' : null,
-                color: statusData[rowIdx][colIdx] === 0 ? 'gray' : '#333',
-                pointerEvents: statusData[rowIdx][colIdx] === 0 ? 'none' : null,
-                cursor: statusData[rowIdx][colIdx] === 0 ? 'none' : 'pointer',
+                color: statusData[rowIdx][colIdx],
               }}
               onMouseDown={() => startSelection(rowIdx, colIdx)}
               onMouseMove={() => updateSelection(rowIdx, colIdx)}

@@ -10,6 +10,12 @@
   gap: 10px;
 }
 
+.game .header-bars {
+  width: 90%;
+  display: flex;
+  gap: 30px;
+}
+
 .game .contestants {
   margin: 2.5px;
   font-weight: 600;

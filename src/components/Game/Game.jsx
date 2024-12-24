@@ -6,9 +6,10 @@ import Button from '../Button/Button';
 import { makeWord, getGridData, getGridStatus } from '../../assets/utils';
 import { useContext, useState } from 'react';
 import WsContext from '../../context/WsContext';
+import PlayerBar from '../PlayerBar/PlayerBar';
 
 export default function Game({ game }) {
-  const { playerId } = useContext(WsContext);
+  const { stompClient, playerId } = useContext(WsContext);
   const demoGridData = getGridData(game.grid);
   const demoGridStatus = getGridStatus(game.grid);
   const [resetTrigger, setResetTrigger] = useState(0);
@@ -27,7 +28,22 @@ export default function Game({ game }) {
     }
 
     // submit the word to backend here...
-    console.log(selectedCells);
+    console.log({
+      text: word,
+      selection: selectedCells,
+      playerId: playerId,
+    });
+
+    stompClient.send(
+      '/game-api/submit-word',
+      {},
+      JSON.stringify({
+        text: word,
+        selection: selectedCells,
+        playerId: playerId,
+      })
+    );
+
     setSelectedCells([]);
     setResetTrigger((prev) => prev + 1);
   };
@@ -45,19 +61,16 @@ export default function Game({ game }) {
   return (
     <div className="game">
       <Header text={`#${game.gameId}`} />
-      <p className="contestants">
-        You{`(${game.playerScores[playerId]})`} vs
-        {` ${game.otherPlayer.name}(${
-          game.playerScores[game.otherPlayer.playerId]
-        })`}
-      </p>
+      <div className="header-bars">
+        <PlayerBar game={game} />
+        <input readOnly className="word-output" type="text" value={word} />
+      </div>
       <WordGrid
         letterData={demoGridData}
         onSelectionUpdate={handleSelectionUpdate}
         resetTrigger={resetTrigger}
         statusData={demoGridStatus}
       />
-      <input readOnly className="word-output" type="text" value={word} />
       <div className="button-group">
         <Button handleClick={handleSubmit} text={'Submit Word'} />
         <Button handleClick={handleClear} text={'Clear Selection'} />

@@ -1,0 +1,35 @@
+.player-bar, .score-bar {
+    display: flex;
+    width: 100%;
+}
+
+.bar {
+    width: 50%;
+    border: 0.5px solid #333;
+}
+
+.score-bar .score {
+    width: 100%;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.score-bar .score:nth-child(1) {
+    border-right: 0.5px solid #333;
+}
+
+.player-bar .player:nth-child(1) {
+    border-right: 0.5px solid #333;
+}
+
+.player-bar {
+    border-bottom: 0.5px solid #333;
+}
+
+.player-bar .player {
+    width: 100%;
+    font-size: 0.75rem;
+    color: white;
+    text-align: center;
+}
+

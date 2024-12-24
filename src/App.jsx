@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import Game from './components/Game/Game';
 import Home from './components/Home/Home';
-import { useState } from 'react';
 import useWebSockets from './hooks/useWebSockets';
 import WsContext from './context/WsContext';
 
